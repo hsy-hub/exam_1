@@ -9,7 +9,25 @@ public class ExamUser {
     String browsetype;
     String publisher;
     String publicTime;
+    String release;
+    String testType;
     User user;
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
+    }
 
     public String getPubstauts() {
         return pubstauts;

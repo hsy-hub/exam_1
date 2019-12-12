@@ -21,9 +21,20 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
             {field: 'id', title: 'ID', width:60, align:"center"},
             {field: 'examName', title: '试题名称', width:350},
             {field: 'publisher', title: '发布者', align:'center'},
-            // {field: 'pubstuats', title: '发布状态',  align:'center',templet:"#pubstuats"},
-            {field: 'pubstauts', title: '发布状态',  align:'center'},
-            {field: 'browsetype', title: '浏览权限', align:'center'},
+            {field: 'pubstauts', title: '发布状态',  align:'center',templet:function (d) {
+                    if(d.pubstauts == "0"){
+                        return "草稿箱";
+                    }else if(d.pubstauts == "1"){
+                        return "已发布";
+                    }
+            }},
+            {field: 'browsetype', title: '浏览权限', align:'center',templet:function (d) {
+                    if(d.browsetype == "1"){
+                        return "开放浏览";
+                    }else if(d.browsetype == "2"){
+                        return "私密浏览";
+                    }
+                }},
             {field: 'publicTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
                 return d.publicTime.substring(0,10);
             }},
@@ -31,18 +42,6 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
         ]]
     });
 
-    //是否置顶
-    // form.on('switch(newsTop)', function(data){
-    //     var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
-    //     setTimeout(function(){
-    //         layer.close(index);
-    //         if(data.elem.checked){
-    //             layer.msg("置顶成功！");
-    //         }else{
-    //             layer.msg("取消置顶成功！");
-    //         }
-    //     },500);
-    // });
 
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $("#search_btn").on("click",function(){
@@ -59,7 +58,7 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
     });
 
 
-    //添加文章
+    //添加试题
     function addNews(edit){
         var index = layui.layer.open({
             title : "添加试题",
@@ -68,13 +67,13 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
-                    body.find(".newsName").val(edit.newsName);
-                    body.find(".abstract").val(edit.abstract);
-                    body.find(".thumbImg").attr("src",edit.newsImg);
-                    body.find("#news_content").val(edit.content);
-                    body.find(".newsStatus select").val(edit.newsStatus);
-                    body.find(".openness input[name='openness'][title='"+edit.newsLook+"']").prop("checked","checked");
-                    body.find(".newsTop input[name='newsTop']").prop("checked",edit.newsTop);
+                    body.find(".examName").val(edit.examName); //试题名称
+                    body.find(".examDecript").val(edit.examDecript);  //试题描述
+                    body.find(".pubstauts select").val(edit.pubstauts);  //发布状态
+                    body.find(".testType input[title=" + edit.testType + "]").prop("checked", "checked");
+                    body.find(".browsetype input[name='browsetype'][title='"+edit.browsetype+"']").prop("checked","checked"); //浏览权限
+                    body.find(".release input[name='release'][title='"+edit.release+"']").prop("checked","checked"); //发布
+                    body.find(".publicTime").val(edit.publicTime);  //发布状态
                     form.render();
                 }
                 setTimeout(function(){

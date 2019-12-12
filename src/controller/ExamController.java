@@ -4,15 +4,18 @@ import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.ExamUser;
 import pojo.ExamRecode;
+import pojo.LoginUser;
 import service.ExamDao;
 import tool.JsonDateValueProcessor;
 import tool.Tool;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +28,7 @@ public class ExamController {
     @Autowired
     HttpServletRequest request;
 
+    //考试记录列表
     @RequestMapping("/examRecode.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
     public Map<String, Object> examList(ExamRecode examRecode, int page, int limit) {
@@ -52,7 +56,7 @@ public class ExamController {
 
 
 
-
+//试题管理列表
     @RequestMapping("/examList.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
     public Map<String, Object> examList(ExamUser exam, int page, int limit) {
@@ -81,6 +85,14 @@ public class ExamController {
             result = examDao.deleteit(Integer.parseInt(id));
         }
         return result;
+    }
+
+    @RequestMapping("/addExam.action")
+    @ResponseBody
+    public int addExam(@RequestBody ExamUser exam) throws IOException {
+        int add = examDao.add(exam);
+        return add;
+
     }
 
 }

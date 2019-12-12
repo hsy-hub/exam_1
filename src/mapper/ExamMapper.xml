@@ -10,21 +10,21 @@
     <result column="score" property="score"/>
     <result column="examTime" property="examTime"/>
     <association property="exam1" javaType="Exam">
-        <id column="id" property="eid"/>
+        <id column="id" property="id"/>
         <result column="examName" property="examName"/>
     </association>
     <association property="user" javaType="User">
-        <id column="id" property="uid"/>
+        <id column="id" property="id"/>
         <result column="loginName" property="loginName"/>
     </association>
     <association property="grade" javaType="Grade">
-        <id column="id" property="gid"/>
+        <id column="id" property="id"/>
         <result column="score" property="score"/>
     </association>
 </resultMap>
 
     <select id="getExamRecodeList" resultMap="resultMap" parameterType="hashmap">
-        SELECT ex.id,u.id AS uid,u.loginName,ex.examTime,e.examName FROM examrecode ex INNER JOIN USER u ON u.id=ex.userid INNER JOIN exam e ON e.id=ex.examName
+        SELECT ex.id,u.id AS uid,u.loginName,ex.examTime,e.examName,g.score FROM examrecode ex INNER JOIN USER u ON u.id=ex.userid INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
         <where>
             <if test="userName != null and userName != ''">
                 and userName like '%${userName}%'
@@ -43,7 +43,7 @@
         <result column="publisher" property="publisher"/>
         <result column="examDecript" property="examDecript"/>
         <result column="classid" property="classid"/>
-        <result column="pubstuats" property="pubstuats"/>
+        <result column="pubstauts" property="pubstauts"/>
         <result column="browsetype" property="browsetype"/>
         <result column="publicTime" property="publicTime"/>
         <association property="user" javaType="User">
@@ -53,7 +53,7 @@
     </resultMap>
 
     <select id="getexamList" resultMap="resultMap1" parameterType="hashmap">
-        SELECT e.*,u.loginName FROM exam e INNER JOIN USER u ON e.publisher=u.id
+        SELECT e.*,u.id AS uid,u.loginName FROM exam e INNER JOIN USER u ON e.publisher=u.id
         <where>
             <if test="examName != null and examName != ''">
                 and examName like  '%${examName}%'
@@ -69,4 +69,8 @@
     <delete id="deleteit" parameterType="examUser">
         delete from exam where id=#{id}
     </delete>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="ExamUser">
+        insert into user value (null,#{examName},#{examDecript},#{pubstauts},#{testType},#{browsetype},#{release},#{publicTime})
+    </insert>
 </mapper>

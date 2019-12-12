@@ -37,4 +37,9 @@ public class ExamDaoImpl implements ExamDao {
     public int deleteit(Integer id) {
         return examMapper.deleteit(id);
     }
+
+    @Override
+    public int add(ExamUser exam) {
+        return examMapper.add(exam);
+    }
 }

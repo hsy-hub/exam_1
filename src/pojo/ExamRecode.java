@@ -7,33 +7,9 @@ public class ExamRecode {
     String exam;
     String score;
     String examTime;
-    ExamUser exam1;
+    Exam exam1;
     User user;
     Grade grade;
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public ExamUser getExam1() {
-        return exam1;
-    }
-
-    public void setExam1(ExamUser exam1) {
-        this.exam1 = exam1;
-    }
 
     public Integer getId() {
         return id;
@@ -81,5 +57,29 @@ public class ExamRecode {
 
     public void setExamTime(String examTime) {
         this.examTime = examTime;
+    }
+
+    public Exam getExam1() {
+        return exam1;
+    }
+
+    public void setExam1(Exam exam1) {
+        this.exam1 = exam1;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
     }
 }

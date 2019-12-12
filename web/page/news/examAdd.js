@@ -1,4 +1,4 @@
-layui.use(['form','layer','layedit','laydate','upload'],function(){
+layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
@@ -20,18 +20,6 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
 	    }
 	  });
 
-
-    //上传缩略图
-    /*upload.render({
-        elem: '.thumbBox',
-        url: '../../json/userface.json',
-        method : "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
-        done: function(res, index, upload){
-            var num = parseInt(4*Math.random());  //生成0-4的随机数，随机显示一个头像信息
-            $('.thumbImg').attr('src',res.data[num].src);
-            $('.thumbBox').css("background","#fff");
-        }
-    });*/
 
     //格式化时间
     function filterTime(val){
@@ -93,21 +81,39 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         // },function(res){
         //
         // })
-        setTimeout(function(){
-            top.layer.close(index);
-            top.layer.msg("文章添加成功！");
-            layer.closeAll("iframe");
-            //刷新父页面
-            parent.location.reload();
-        },500);
-        return false;
-    })
+        $.ajax(
+            {
+                url: "/ssm/addExam.action",
+                data: JSON.stringify(data.field),
+                type: "post",
+                contentType: "application/json",
+                success: function (d) {
+                    console.log(d);
+                    if (d > 0) {
+                        reid = d;
+                        parent.location.reload();    //添加后返回列表页面进行刷新
+                        var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
+                        parent.layer.close(index);     //关闭当前frame/刷新父页面
+                    } else {
+                        layer.msg("添加失败！")
+                    }
+                }
+            });
+        // setTimeout(function(){
+        //     top.layer.close(index);
+        //     top.layer.msg("文章添加成功！");
+        //     layer.closeAll("iframe");
+        //     //刷新父页面
+        //     parent.location.reload();
+        // },500);
+        return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
 
     //预览
     form.on("submit(look)",function(){
         layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问");
         return false;
-    })
+    });
 
     //创建一个编辑器
     var editIndex = layedit.build('news_content',{
@@ -117,4 +123,4 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         }
     });
 
-})
+});

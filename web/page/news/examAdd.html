@@ -19,22 +19,17 @@
 			<div class="layui-col-md9 layui-col-xs7">
 				<div class="layui-form-item magt3">
 					<label class="layui-form-label">试题名称</label>
-					<div class="layui-input-block">
-						<input type="text" class="layui-input newsName" lay-verify="newsName" placeholder="请输入试题名称">
+					<div class="layui-input-block examName">
+						<input type="text" class="layui-input examName" lay-verify="examName" placeholder="请输入试题名称">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">试题说明</label>
-					<div class="layui-input-block">
-						<textarea placeholder="请输入试题说明" class="layui-textarea abstract"></textarea>
+					<div class="layui-input-block examDecript">
+						<textarea placeholder="请输入试题说明" class="layui-textarea examDecript" name="examDecript"></textarea>
 					</div>
 				</div>
 			</div>
-			<!--<div class="layui-col-md3 layui-col-xs5">
-				<div class="layui-upload-list thumbBox mag0 magt3">
-					<img class="layui-upload-img thumbImg">
-				</div>
-			</div>-->
 		</div>
 		<div class="layui-form-item magb0">
 			<label class="layui-form-label">试题上传</label>
@@ -47,15 +42,14 @@
 				  <i class="layui-icon"></i>
 				  <p>点击上传，或将文件拖拽到此处</p>
 				</div>
-				<!--<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="news_content"></textarea>-->
 			</div>
 		</div>
 	</div>
 	<div class="layui-col-md3 layui-col-xs12">
 		<blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 分类目录</blockquote>
 		<div class="border category">
-			<div class="">
-				<p><input type="checkbox" name="news" checked title="单选题" lay-skin="primary" /></p>
+			<div class="layui-input-block testType">
+				<p><input type="checkbox" name="testType" checked value="1" title="单选题" lay-skin="primary" /></p>
 				<p><input type="checkbox" name="goods" disabled title="多选题" lay-skin="primary" /></p>
 				<p><input type="checkbox" name="notice" disabled title="填空题" lay-skin="primary" /></p>
 			</div>
@@ -64,42 +58,36 @@
 		<div class="border">
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 状　态</label>
-				<div class="layui-input-block newsStatus">
-					<select name="status" lay-verify="required">
-						<option value="0">保存草稿</option>
-						<option value="1">等待审核</option>
+				<div class="layui-input-block pubstauts">
+					<select name="pubstauts" class="pubstauts" lay-verify="required">
+						<option value="0">草稿箱</option>
+						<option value="1">已发布</option>
 					</select>
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i class="layui-icon">&#xe609;</i> 发　布</label>
-				<div class="layui-input-block">
-					<input type="radio" name="release" title="立即发布" lay-skin="primary" lay-filter="release" checked />
-					<input type="radio" name="release" title="定时发布" lay-skin="primary" lay-filter="release" />
+				<div class="layui-input-block release">
+					<input type="radio" name="release" value="1" title="立即发布" lay-skin="primary" lay-filter="release" checked />
+					<input type="radio" name="release" value="2"  title="定时发布" lay-skin="primary" lay-filter="release" />
 				</div>
 			</div>
 			<div class="layui-form-item layui-hide releaseDate">
 				<label class="layui-form-label"></label>
-				<div class="layui-input-block">
-					<input type="text" class="layui-input" id="release" placeholder="请选择日期和时间" readonly />
+				<div class="layui-input-block publicTime">
+					<input type="text" class="layui-input publicTime" id="release" name="publicTime" placeholder="请选择日期和时间" readonly />
 				</div>
 			</div>
 			<div class="layui-form-item openness">
 				<label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>
-				<div class="layui-input-block">
-					<input type="radio" name="openness" title="开放浏览" lay-skin="primary" checked />
-					<input type="radio" name="openness" title="私密浏览" lay-skin="primary" />
-				</div>
-			</div>
-			<div class="layui-form-item newsTop">
-				<label class="layui-form-label"><i class="seraph icon-zhiding"></i> 置　顶</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="newsTop" lay-skin="switch" lay-text="是|否">
+				<div class="layui-input-block browsetype">
+					<input type="radio" name="browsetype" value="1" title="开放浏览" lay-skin="primary" checked />
+					<input type="radio" name="browsetype" value="2" title="私密浏览" lay-skin="primary" />
 				</div>
 			</div>
 			<hr class="layui-bg-gray" />
-			<div class="layui-right">
-				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</a>
+			<div class="layui-form-item layui-right">
+				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit=""><i class="layui-icon">&#xe609;</i>发布</a>
 				<!--<a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>-->
 			</div>
 		</div>

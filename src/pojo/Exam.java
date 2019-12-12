@@ -9,6 +9,24 @@ public class Exam {
     String browsetype;
     String publisher;
     String publicTime;
+    String release;
+    String testType;
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
+    }
 
     public Integer getId() {
         return id;

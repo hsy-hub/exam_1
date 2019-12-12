@@ -13,4 +13,5 @@ public interface ExamDao {
     List<ExamUser> getexamList(HashMap map);
     Integer examListCount();
     int deleteit(Integer id);
+    int add(ExamUser exam);
 }

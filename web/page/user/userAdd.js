@@ -31,14 +31,14 @@ layui.use(['form','layer'],function(){
                         console.log(d);
                         if (d > 0) {
                             reid = d;
-                            parent.location.reload();    //修改后返回列表页面进行刷新
+                            parent.location.reload();    //添加后返回列表页面进行刷新
                             var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
                             parent.layer.close(index);     //关闭当前frame/刷新父页面
                         } else {
                             layer.msg("添加失败！")
                         }
                     }
-                })
+                });
         //     top.layer.close(index);
         //     top.layer.msg("用户添加成功！");
         //     layer.closeAll("iframe");
