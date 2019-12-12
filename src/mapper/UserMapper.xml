@@ -1,0 +1,77 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+    <!--使用resultMap，定义专门的resultMap用于映射一对一查询结果-->
+    <resultMap id="resultMap" type="loginUser"> <!--type里为pojo里主表名，不分大小写-->
+        <id column="id" property="id"/>
+        <result column="loginName" property="loginName"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="level" property="level"/>
+        <result column="stauts" property="stauts"/>
+        <result column="describe" property="describe"/>
+        <result column="classid" property="classid"/>
+        <result column="endLoginTime" property="endLoginTime"/>
+        <!--在User类中加入levels属性，levels属性中用于存储关联查询的用户信息，因为关联查询用户是一对一关系，所以这里使用单个Level对象存储关联查询的用户信息-->
+        <!--association:配置一对一属性-->
+        <!--property:User里面的Level属性名-->
+        <!--javaType:属性的类型-->
+        <association property="levels" javaType="Level">
+            <id property="id" column="lid"/>
+            <result property="levelName" column="levelName"/>
+        </association>
+        <association property="stauts1" javaType="Stauts">
+            <id property="id" column="sid"/>
+            <result property="stautsName" column="stautsName"/>
+        </association>
+        <association property="gender1" javaType="Gender">
+            <id property="id" column="gid"/>
+            <result property="genderName" column="genderName"/>
+        </association>
+    </resultMap>
+
+    <sql id="sql">
+        select * from user
+    </sql>
+    <select id="login" parameterType="loginUser" resultType="loginUser">
+        <include refid="sql"/>
+        where loginName=#{loginName} and password=#{password}
+    </select>
+
+    <select id="getUserList" resultMap="resultMap" parameterType="hashmap">
+        SELECT u.* ,l.id as lid,l.levelName,g.id as gid,g.genderName,s.id as sid,s.stautsName FROM USER u LEFT JOIN level l ON u.level=l.id
+        INNER JOIN stauts s ON u.stauts=s.id INNER JOIN gender g ON u.gender=g.id
+        <where>
+            <if test="loginName != null and loginName != ''">
+                and loginName like '%${loginName}%'
+            </if>
+        </where>
+        limit #{pagestart},#{size}
+    </select>
+
+    <select id="userCount" resultType="integer">
+        select count(*) from user
+    </select>
+
+    <delete id="delete" parameterType="loginUser">
+        delete from user where id=#{id}
+    </delete>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="loginUser">
+        insert into user value (null,#{loginName},null,#{email},#{gender},#{level},#{stauts},#{describe},#{classid},null)
+    </insert>
+
+    <!--<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="user">-->
+    <!--insert into user(loginName,email,gender,level,stauts,describe) values (null,#{loginName},#{email},#{gender},#{level},#{stauts},#{describe})-->
+    <!--</insert>-->
+
+    <update id="updateUserList" parameterType="user">
+        update user set loginName=#{loginName},email=#{email},gender=#{gender},level=#{level},stauts=#{stauts},describe=#{describe},classid=#{classid} where id=#{id}
+    </update>
+
+    <update id="endLoginTime" parameterType="hashmap">
+        update user set endLoginTime=#{endLoginTime} where id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "id": "1",
+      "loginName": "杜鑫",
+      "email": "mage@layui.com",
+      "gender": "男",
+      "stauts": "1",
+      "level": "1",
+      "endLoginTime": "2018-01-31 10:00",
+      "userDesc" : "考试系统作者，原名‘三金’"
+    },{
+      "id": "2",
+      "loginName": "贤心",
+      "email": "xianxin@layui.com",
+      "gender": "保密",
+      "stauts": "1",
+      "level": "3",
+      "endLoginTime": "2018-01-14 15:35",
+      "userDesc" : "layui框架作者，性别至今是个谜。。。"
+    },
+    {
+      "id": "3",
+      "loginName": "纸飞机",
+      "email": "fly@layui.com",
+      "gender": "男",
+      "stauts": "2",
+      "level": "2",
+      "endLoginTime": "2018-01-25 16:25",
+      "userDesc" : "fly社区管理员，据传与layui作者有奸情，故帐号被封。"
+    }
+  ]
+}

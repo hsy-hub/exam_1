@@ -1,0 +1,72 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ExamMapper">
+<resultMap id="resultMap" type="examrecode">
+    <id column="id" property="id"/>
+    <result column="userid" property="userid"/>
+    <result column="userName" property="userName"/>
+    <result column="exam" property="exam"/>
+    <result column="score" property="score"/>
+    <result column="examTime" property="examTime"/>
+    <association property="exam1" javaType="Exam">
+        <id column="id" property="eid"/>
+        <result column="examName" property="examName"/>
+    </association>
+    <association property="user" javaType="User">
+        <id column="id" property="uid"/>
+        <result column="loginName" property="loginName"/>
+    </association>
+    <association property="grade" javaType="Grade">
+        <id column="id" property="gid"/>
+        <result column="score" property="score"/>
+    </association>
+</resultMap>
+
+    <select id="getExamRecodeList" resultMap="resultMap" parameterType="hashmap">
+        SELECT ex.id,u.id AS uid,u.loginName,ex.examTime,e.examName FROM examrecode ex INNER JOIN USER u ON u.id=ex.userid INNER JOIN exam e ON e.id=ex.examName
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like '%${userName}%'
+            </if>
+        </where>
+        limit #{pagestart},#{size}
+    </select>
+    <select id="examrecodeCount" resultType="integer">
+        select count(*) from examrecode
+    </select>
+
+
+    <resultMap id="resultMap1" type="examUser">
+        <id column="id" property="id"/>
+        <result column="examName" property="examName"/>
+        <result column="publisher" property="publisher"/>
+        <result column="examDecript" property="examDecript"/>
+        <result column="classid" property="classid"/>
+        <result column="pubstuats" property="pubstuats"/>
+        <result column="browsetype" property="browsetype"/>
+        <result column="publicTime" property="publicTime"/>
+        <association property="user" javaType="User">
+            <id column="id" property="id"/>
+            <result column="loginName" property="loginName"/>
+        </association>
+    </resultMap>
+
+    <select id="getexamList" resultMap="resultMap1" parameterType="hashmap">
+        SELECT e.*,u.loginName FROM exam e INNER JOIN USER u ON e.publisher=u.id
+        <where>
+            <if test="examName != null and examName != ''">
+                and examName like  '%${examName}%'
+            </if>
+        </where>
+        limit #{pagestart},#{size}
+    </select>
+
+    <select id="examListCount" resultType="integer">
+        select count(*) from exam
+    </select>
+
+    <delete id="deleteit" parameterType="examUser">
+        delete from exam where id=#{id}
+    </delete>
+</mapper>
