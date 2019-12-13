@@ -74,4 +74,8 @@
     <update id="endLoginTime" parameterType="hashmap">
         update user set endLoginTime=#{endLoginTime} where id=#{id}
     </update>
+
+    <select id="getClassList" resultType="ClassList">
+        select * from class
+    </select>
 </mapper>

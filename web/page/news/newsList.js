@@ -35,9 +35,11 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
                         return "私密浏览";
                     }
                 }},
-            {field: 'publicTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-                return d.publicTime.substring(0,10);
-            }},
+            {field: 'publicTime', title: '发布时间', align:'center', minWidth:110
+            //     , templet:function(d){
+            //     return d.publicTime.substring(0,10);
+            // }
+            },
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });

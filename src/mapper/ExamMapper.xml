@@ -71,6 +71,6 @@
     </delete>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="ExamUser">
-        insert into user value (null,#{examName},#{examDecript},#{pubstauts},#{testType},#{browsetype},#{release},#{publicTime})
+        insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null)
     </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.Date;
+
 public class ExamUser {
     Integer id;
     String examName;
@@ -8,7 +10,7 @@ public class ExamUser {
     String pubstauts;
     String browsetype;
     String publisher;
-    String publicTime;
+    Date publicTime;
     String release;
     String testType;
     User user;
@@ -37,11 +39,11 @@ public class ExamUser {
         this.pubstauts = pubstauts;
     }
 
-    public String getPublicTime() {
+    public Date getPublicTime() {
         return publicTime;
     }
 
-    public void setPublicTime(String publicTime) {
+    public void setPublicTime(Date publicTime) {
         this.publicTime = publicTime;
     }
 

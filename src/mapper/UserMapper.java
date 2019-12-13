@@ -1,16 +1,25 @@
 package mapper;
 
+import pojo.ClassList;
 import pojo.LoginUser;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface UserMapper {
-    LoginUser login(LoginUser user);
-    List<LoginUser> getUserList(HashMap map);
-    Integer userCount();
-    int delete(Integer id);
-    int add(LoginUser user);
-    int updateUserList(LoginUser user);
-    int endLoginTime(HashMap map);
+    public LoginUser login(LoginUser user);
+
+    public List<LoginUser> getUserList(HashMap map);
+
+    public Integer userCount();
+
+    public int delete(Integer id);
+
+    public int add(LoginUser user);
+
+    public int updateUserList(LoginUser user);
+
+    public int endLoginTime(HashMap map);
+
+    public List<ClassList> getClassList();
 }

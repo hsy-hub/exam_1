@@ -3,6 +3,7 @@ package service;
 import mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.ClassList;
 import pojo.LoginUser;
 
 import java.util.HashMap;
@@ -46,5 +47,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int endLoginTime(HashMap map) {
         return userMapper.endLoginTime(map);
+    }
+
+    @Override
+    public List<ClassList> getClassList() {
+        return userMapper.getClassList();
     }
 }

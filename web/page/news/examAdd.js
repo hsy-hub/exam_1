@@ -1,3 +1,4 @@
+var reid;
 layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -9,6 +10,8 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
 
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
+
+    $("#publisher").val(JSON.parse(window.sessionStorage.getItem("user")).id); //取到登录者的id
 
 	 //拖拽上传
 	  upload.render({
@@ -65,22 +68,9 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
     })
     form.on("submit(addNews)",function(data){
         //截取文章内容中的一部分文字放入文章摘要
-        var abstract = layedit.getText(editIndex).substring(0,50);
+        // var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        // 实际使用时的提交信息
-        // $.post("上传路径",{
-        //     newsName : $(".newsName").val(),  //文章标题
-        //     abstract : $(".abstract").val(),  //文章摘要
-        //     content : layedit.getContent(editIndex).split('<audio controls="controls" style="display: none;"></audio>')[0],  //文章内容
-        //     newsImg : $(".thumbImg").attr("src"),  //缩略图
-        //     classify : '1',    //文章分类
-        //     newsStatus : $('.newsStatus select').val(),    //发布状态
-        //     newsTime : submitTime,    //发布时间
-        //     newsTop : data.filed.newsTop == "on" ? "checked" : "",    //是否置顶
-        // },function(res){
-        //
-        // })
         $.ajax(
             {
                 url: "/ssm/addExam.action",
@@ -123,4 +113,20 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
         }
     });
 
-});
+    $.ajax({
+        url: '/ssm/ClassList.action',
+        type: "post",
+        success: function (d) {
+            var c = $("#classid");
+            var op="";
+            for (var i = 0; i < d.length; i++) {
+                console.log(d[i].id);
+                console.log(d[i].className);
+                op += "<option value='" + d[i].id + "'>" + d[i].className + "</option>"
+            }
+            c.append(op);
+                form.render();
+            }
+    })
+
+            });

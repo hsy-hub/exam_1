@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pojo.ClassList;
 import pojo.LoginUser;
 import service.UserDao;
 import tool.JsonDateValueProcessor;
@@ -99,6 +100,12 @@ public class UserController {
     @ResponseBody
     public int userCount() {
         return userDao.userCount();
+    }
+
+    @RequestMapping("/ClassList.action")
+    @ResponseBody
+    public List<ClassList> ClassList() {
+        return userDao.getClassList();
     }
 
 }
