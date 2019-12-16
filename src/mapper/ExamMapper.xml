@@ -4,19 +4,20 @@
 <mapper namespace="mapper.ExamMapper">
 <resultMap id="resultMap" type="examrecode">
     <id column="id" property="id"/>
-    <result column="userid" property="userid"/>
-    <result column="userName" property="userName"/>
-    <result column="exam" property="exam"/>
+    <!--<result column="userid" property="userid"/>-->
+    <result column="examName" property="examName"/>
+    <result column="examDecript" property="examDecript"/>
     <result column="score" property="score"/>
     <result column="examTime" property="examTime"/>
     <association property="exam1" javaType="Exam">
         <id column="id" property="id"/>
         <result column="examName" property="examName"/>
+        <result column="examDecript" property="examDecript"/>
     </association>
-    <association property="user" javaType="User">
-        <id column="id" property="id"/>
-        <result column="loginName" property="loginName"/>
-    </association>
+    <!--<association property="user" javaType="User">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="loginName" property="loginName"/>-->
+    <!--</association>-->
     <association property="grade" javaType="Grade">
         <id column="id" property="id"/>
         <result column="score" property="score"/>
@@ -24,10 +25,10 @@
 </resultMap>
 
     <select id="getExamRecodeList" resultMap="resultMap" parameterType="hashmap">
-        SELECT ex.id,u.id AS uid,u.loginName,ex.examTime,e.examName,g.score FROM examrecode ex INNER JOIN USER u ON u.id=ex.userid INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
+        SELECT ex.id,e.examName,e.examDecript,e.classid,g.score,ex.examTime FROM examrecode ex INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
         <where>
-            <if test="userName != null and userName != ''">
-                and userName like '%${userName}%'
+            <if test="examName != null and examName != ''">
+                and examName like '%${examName}%'
             </if>
         </where>
         limit #{pagestart},#{size}

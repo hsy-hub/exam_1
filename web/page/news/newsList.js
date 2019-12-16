@@ -134,38 +134,5 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
         }
     });
 
-    //列表操作
-    table.on('tool(newsList)', function(obj){
-        var layEvent = obj.event,
-            data = obj.data;
-
-        if(layEvent === 'edit'){ //编辑
-            addNews(data);
-        } else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此文章？',{icon:3, title:'提示信息'},function(index){
-                $.ajax({
-                    url: "/ssm/deleteit.action",
-                    data: {"ids": data.id},
-                    success: function (flag) {
-                        if (flag == 1) {
-                            layer.msg("删除成功");
-                            layer.closeAll();
-                            table.reload('newsListTable', {});
-                        } else {
-                            layer.msg("删除失败");
-                        }
-                    }
-                })
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
-                //     tableIns.reload();
-                //     layer.close(index);
-                // })
-            });
-        } else if(layEvent === 'look'){ //预览
-            layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问")
-        }
-    });
 
 });

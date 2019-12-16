@@ -19,19 +19,11 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl','jquery'], function () 
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
             {field: 'id', title: 'ID', width: 60, align: "center"},
-            {templet: '<div>{{(d.user.id)}}</div>', title: '用户ID', align: 'center'},
-            // {field: 'userid', title: '用户ID', width: 350},
-            {templet: '<div>{{(d.user.loginName)}}</div>', title: '用户姓名', align: 'center'},
-            // {field: 'userName', title: '姓名', align: 'center'},
+            // {templet: '<div>{{(d.user.id)}}</div>', title: '用户ID', align: 'center'},
             {templet: '<div>{{(d.exam.examName)}}</div>', title: '试卷名称', align: 'center'},
-            // {field: 'exam', title: '试卷名称', align: 'center', templet: "#newsStatus"},
+            {templet: '<div>{{(d.exam.examDecript)}}</div>', title: '试题描述', align: 'center'},
             {templet: '<div>{{(d.grade.score)}}</div>', title: '分数', align: 'center'},
-            // {field: 'score', title: '分数', align: 'center'},
-            /*{field: 'newsTop', title: '是否置顶', align:'center', templet:function(d){
-                return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
-            }},*/
-            {
-                field: 'examTime', title: '考试时间', align: 'center', minWidth: 110, templet: function (d) {
+            {field: 'examTime', title: '考试时间', align: 'center', minWidth: 110, templet: function (d) {
                     return d.examTime.substring(0, 10);
                 }
             }

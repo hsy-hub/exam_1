@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.ExamUser;
 import pojo.ExamRecode;
-import pojo.LoginUser;
+
 import service.ExamDao;
 import tool.JsonDateValueProcessor;
 import tool.Tool;
@@ -36,7 +36,7 @@ public class ExamController {
         int pagestart = (page - 1) * limit;
         map.put("pagestart", pagestart);
         map.put("size", limit);
-        map.put("userName", examRecode.getUserName());//查询条件
+        map.put("examName", examRecode.getExamName());//查询条件
         List<ExamRecode> examList = examDao.getExamRecodeList(map);
 //        Integer pagecount = examDao.examrecodeCount();
         map.put("code",0);    //自己设定的code值一定要写0，其他的值都是错误的

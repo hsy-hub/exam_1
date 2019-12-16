@@ -2,13 +2,13 @@ package pojo;
 
 public class ExamRecode {
     Integer id;
-    Integer userid;
-    String userName;
-    String exam;
+//    Integer userid;
+    String examName;
+    String examDecript;
     String score;
     String examTime;
     Exam exam1;
-    User user;
+//    User user;
     Grade grade;
 
     public Integer getId() {
@@ -19,28 +19,29 @@ public class ExamRecode {
         this.id = id;
     }
 
-    public Integer getUserid() {
-        return userid;
+//    public Integer getUserid() {
+//        return userid;
+//    }
+//
+//    public void setUserid(Integer userid) {
+//        this.userid = userid;
+//    }
+
+
+    public String getExamName() {
+        return examName;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setExamName(String examName) {
+        this.examName = examName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getExamDecript() {
+        return examDecript;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getExam() {
-        return exam;
-    }
-
-    public void setExam(String exam) {
-        this.exam = exam;
+    public void setExamDecript(String examDecript) {
+        this.examDecript = examDecript;
     }
 
     public String getScore() {
@@ -67,13 +68,13 @@ public class ExamRecode {
         this.exam1 = exam1;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Grade getGrade() {
         return grade;
