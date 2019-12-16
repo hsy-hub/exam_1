@@ -1,7 +1,8 @@
 var reid;
 layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],function(){
     var form = layui.form
-        layer = parent.layer === undefined ? layui.layer : top.layer,
+        // layer = parent.layer === undefined ? layui.layer : top.layer,
+        layer=layui.layer,
         laypage = layui.laypage,
         upload = layui.upload,
         layedit = layui.layedit,
@@ -11,7 +12,9 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
 
-    $("#publisher").val(JSON.parse(window.sessionStorage.getItem("user")).id); //取到登录者的id
+    console.log(window.sessionStorage.getItem("users")); //这里的user为页面缓存的user
+    $("#publisher").val(JSON.parse(window.sessionStorage.getItem("users")).id); //取到登录者的id
+
 
 	 //拖拽上传
 	  upload.render({
@@ -65,7 +68,7 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
                 return "文章内容不能为空";
             }
         }
-    })
+    });
     form.on("submit(addNews)",function(data){
         //截取文章内容中的一部分文字放入文章摘要
         // var abstract = layedit.getText(editIndex).substring(0,50);
