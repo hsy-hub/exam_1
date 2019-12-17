@@ -25,7 +25,7 @@
 </resultMap>
 
     <select id="getExamRecodeList" resultMap="resultMap" parameterType="hashmap">
-        SELECT ex.id,e.examName,e.examDecript,e.classid,g.score,ex.examTime FROM examrecode ex INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
+        SELECT ex.id,e.examName,e.examDecript,g.score,ex.examTime FROM examrecode ex INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
         <where>
             <if test="examName != null and examName != ''">
                 and examName like '%${examName}%'

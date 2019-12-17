@@ -20,14 +20,14 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl','jquery'], function () 
             {type: "checkbox", fixed: "left", width: 50},
             {field: 'id', title: 'ID', width: 60, align: "center"},
             // {templet: '<div>{{(d.user.id)}}</div>', title: '用户ID', align: 'center'},
-            {templet: '<div>{{(d.exam.examName)}}</div>', title: '试卷名称', align: 'center'},
-            {templet: '<div>{{(d.exam.examDecript)}}</div>', title: '试题描述', align: 'center'},
+            {templet: '<div>{{(d.exam1.examName)}}</div>', title: '试卷名称', align: 'center'},
+            {templet: '<div>{{(d.exam1.examDecript)}}</div>', title: '试题描述', align: 'center'},
             {templet: '<div>{{(d.grade.score)}}</div>', title: '分数', align: 'center'},
             {field: 'examTime', title: '考试时间', align: 'center', minWidth: 110, templet: function (d) {
                     return d.examTime.substring(0, 10);
                 }
-            }
-            /*{title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}*/
+            },
+            {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });
 
