@@ -12,8 +12,8 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
 
-    console.log(window.sessionStorage.getItem("users")); //这里的user为页面缓存的user
-    $("#publisher").val(JSON.parse(window.sessionStorage.getItem("users")).id); //取到登录者的id
+    console.log(window.sessionStorage.getItem("user")); //这里的user为页面缓存的user
+    $("#publisher").val(JSON.parse(window.sessionStorage.getItem("user")).id); //取到登录者的id
 
 
 	 //拖拽上传
@@ -73,7 +73,7 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
         //截取文章内容中的一部分文字放入文章摘要
         // var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
-        var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+        // var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
         $.ajax(
             {
                 url: "/ssm/addExam.action",

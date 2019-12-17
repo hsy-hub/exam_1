@@ -9,9 +9,9 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
         element = layui.element,
         $ = layui.$,
         layer = parent.layer === undefined ? layui.layer : top.layer;
-    var username = window.sessionStorage.getItem("user");   //取值
+    var username = JSON.parse(window.sessionStorage.getItem("user"));   //取值
     $("#username").html(username);
-    var right = window.sessionStorage.getItem("level");   //取值
+    var right = JSON.parse(window.sessionStorage.getItem("user")).level;   //取值
     var url;
     if (right == 1) {
         url = "json/admin.json"

@@ -1,10 +1,12 @@
-layui.use(['form', 'layer', 'laydate', 'table', 'laytpl','jquery'], function () {
+layui.use(['form', 'layer', 'laydate', 'table', 'jquery'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laydate = layui.laydate,
-        laytpl = layui.laytpl,
+        // laytpl = layui.laytpl,
         table = layui.table;
+
+    var id = JSON.parse(window.sessionStorage.getItem("user")).id; //取到登录者的id
 
     //考试记录列表
     var tableIns = table.render({
@@ -20,13 +22,16 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl','jquery'], function () 
             {type: "checkbox", fixed: "left", width: 50},
             {field: 'id', title: 'ID', width: 60, align: "center"},
             // {templet: '<div>{{(d.user.id)}}</div>', title: '用户ID', align: 'center'},
-            {templet: '<div>{{(d.exam1.examName)}}</div>', title: '试卷名称', align: 'center'},
-            {templet: '<div>{{(d.exam1.examDecript)}}</div>', title: '试题描述', align: 'center'},
+            // {templet: '<div>{{(d.exam1.examName)}}</div>', title: '试卷名称', align: 'center'},
+            {field: 'examName', title: '试卷名称', align: "center"},
+            // {templet: '<div>{{(d.exam1.examDecript)}}</div>', title: '试题描述', align: 'center'},
+            {field: 'examDecript', title: '试题描述', align: "center"},
             {templet: '<div>{{(d.grade.score)}}</div>', title: '分数', align: 'center'},
-            {field: 'examTime', title: '考试时间', align: 'center', minWidth: 110, templet: function (d) {
-                    return d.examTime.substring(0, 10);
-                }
-            },
+            // {field: 'examTime', title: '考试时间', align: 'center', minWidth: 110
+                // , templet: function (d) {
+                //     return d.examTime.substring(0, 10);
+                // }
+            // },
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });

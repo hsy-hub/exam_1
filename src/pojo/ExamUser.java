@@ -14,6 +14,15 @@ public class ExamUser {
     String release;
     String testType;
     User user;
+    Grade grade;
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
     public String getRelease() {
         return release;

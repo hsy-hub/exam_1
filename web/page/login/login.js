@@ -23,9 +23,9 @@ layui.use(['form','layer','jquery'],function(){
                     console.log(d);
                     if (d) {
                         console.log(d);
-                        window.sessionStorage.setItem("users",JSON.stringify(d));
+                        window.sessionStorage.setItem("user",JSON.stringify(d));
                         // window.sessionStorage.setItem("user", d.loginName); //放值
-                        window.sessionStorage.setItem("level", d.level); //放值
+                        // window.sessionStorage.setItem("level", d.level); //放值
                         window.location.href = "/ssm/index.html";
                     } else {
                         layer.msg("用户名或密码错误！")

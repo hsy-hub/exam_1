@@ -2,30 +2,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ExamMapper">
-<resultMap id="resultMap" type="examrecode">
-    <id column="id" property="id"/>
-    <!--<result column="userid" property="userid"/>-->
-    <result column="examName" property="examName"/>
-    <result column="examDecript" property="examDecript"/>
-    <result column="score" property="score"/>
-    <result column="examTime" property="examTime"/>
-    <association property="exam1" javaType="Exam">
-        <id column="id" property="id"/>
-        <result column="examName" property="examName"/>
-        <result column="examDecript" property="examDecript"/>
-    </association>
-    <!--<association property="user" javaType="User">-->
+<!--<resultMap id="resultMap" type="examrecode">-->
+    <!--<id column="id" property="id"/>-->
+    <!--&lt;!&ndash;<result column="userid" property="userid"/>&ndash;&gt;-->
+    <!--<result column="examName" property="examName"/>-->
+    <!--<result column="examDecript" property="examDecript"/>-->
+    <!--<result column="score" property="score"/>-->
+    <!--<result column="examTime" property="examTime"/>-->
+    <!--<association property="exam1" javaType="Exam">-->
         <!--<id column="id" property="id"/>-->
-        <!--<result column="loginName" property="loginName"/>-->
+        <!--<result column="examName" property="examName"/>-->
+        <!--<result column="examDecript" property="examDecript"/>-->
     <!--</association>-->
-    <association property="grade" javaType="Grade">
-        <id column="id" property="id"/>
-        <result column="score" property="score"/>
-    </association>
-</resultMap>
+    <!--&lt;!&ndash;<association property="user" javaType="User">&ndash;&gt;-->
+        <!--&lt;!&ndash;<id column="id" property="id"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<result column="loginName" property="loginName"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</association>&ndash;&gt;-->
+    <!--<association property="grade" javaType="Grade">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="score" property="score"/>-->
+    <!--</association>-->
+<!--</resultMap>-->
 
-    <select id="getExamRecodeList" resultMap="resultMap" parameterType="hashmap">
-        SELECT ex.id,e.examName,e.examDecript,g.score,ex.examTime FROM examrecode ex INNER JOIN exam e ON e.id=ex.examName LEFT JOIN grade g ON g.id=ex.score
+    <select id="getExamRecodeList" resultMap="resultMap1" parameterType="hashmap">
+        SELECT e.id,e.examName,e.examDecript,g.score FROM exam e INNER JOIN grade g ON g.classid=e.classid
         <where>
             <if test="examName != null and examName != ''">
                 and examName like '%${examName}%'
@@ -55,6 +55,10 @@
         <association property="user" javaType="User">
             <id column="id" property="id"/>
             <result column="loginName" property="loginName"/>
+        </association>
+        <association property="grade" javaType="Grade">
+            <id column="id" property="id"/>
+            <result column="score" property="score"/>
         </association>
     </resultMap>
 

@@ -33,7 +33,7 @@ layui.use(['form', 'element', 'layer', 'jquery'], function () {
         element = layui.element;
     $ = layui.jquery;
 
-    var right = window.sessionStorage.getItem("level");   //取值
+    var right = JSON.parse(window.sessionStorage.getItem("user")).level;   //取值
     if (right == 2) {
         $("#userAll").css("display", "none")
     }

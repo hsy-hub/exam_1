@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.ExamUser;
-import pojo.ExamRecode;
+
 
 import service.ExamDao;
 import tool.JsonDateValueProcessor;
@@ -31,29 +32,25 @@ public class ExamController {
     //考试记录列表
     @RequestMapping("/examRecode.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
-    public Map<String, Object> examList(ExamRecode examRecode, int page, int limit) {
+    public Map<String, Object> examRecode(ExamUser examRecode,Integer id,int page, int limit) {
         HashMap<String, Object> map = new HashMap<>();
         int pagestart = (page - 1) * limit;
         map.put("pagestart", pagestart);
         map.put("size", limit);
+        map.put("id",id);
         map.put("examName", examRecode.getExamName());//查询条件
-        List<ExamRecode> examList = examDao.getExamRecodeList(map);
-//        Integer pagecount = examDao.examrecodeCount();
+        List<ExamUser> examList = examDao.getExamRecodeList(map);
         map.put("code",0);    //自己设定的code值一定要写0，其他的值都是错误的
         map.put("msg","");    //msg的值一定要写"",不然会一直报错
         map.put("count",examDao.examrecodeCount());
+//        Map<String, Object> returnTable = Tool.testLayui(examList, page, limit);
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
         JSONArray userMap = JSONArray.fromObject(examList, jsonConfig);
-//        Map<String, Object> returnTable = Tool.testLayui(examList, page, limit);
         map.put("data", userMap);
         return map;
+
     }
-
-
-
-
-
 
 
 //试题管理列表
