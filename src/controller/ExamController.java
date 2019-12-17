@@ -32,7 +32,7 @@ public class ExamController {
     //考试记录列表
     @RequestMapping("/examRecode.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
-    public Map<String, Object> examRecode(ExamUser examRecode,Integer id,int page, int limit) {
+    public Map<String, Object> examRecode(ExamUser examRecode,@RequestParam("id")Integer id,int page, int limit) {
         HashMap<String, Object> map = new HashMap<>();
         int pagestart = (page - 1) * limit;
         map.put("pagestart", pagestart);

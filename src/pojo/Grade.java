@@ -2,7 +2,7 @@ package pojo;
 
 public class Grade {
     Integer id;
-    String paperid;
+    String examid;
     String score;
     String classid;
 
@@ -14,12 +14,12 @@ public class Grade {
         this.id = id;
     }
 
-    public String getPaperid() {
-        return paperid;
+    public String getExamid() {
+        return examid;
     }
 
-    public void setPaperid(String paperid) {
-        this.paperid = paperid;
+    public void setExamid(String examid) {
+        this.examid = examid;
     }
 
     public String getScore() {

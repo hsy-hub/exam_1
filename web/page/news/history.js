@@ -11,7 +11,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'jquery'], function () {
     //考试记录列表
     var tableIns = table.render({
         elem: '#newsList',
-        url: '/ssm/examRecode.action',
+        url: '/ssm/examRecode.action?id='+id,
         cellMinWidth: 95,
         page: true,
         height: "full-125",
