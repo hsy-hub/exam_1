@@ -43,7 +43,7 @@ public class ExamController {
         List<ExamUser> examList = examDao.getExamRecodeList(map);
         map.put("code",0);    //自己设定的code值一定要写0，其他的值都是错误的
         map.put("msg","");    //msg的值一定要写"",不然会一直报错
-        map.put("count",examDao.examrecodeCount());
+        map.put("count",examDao.examListCount());
 //        Map<String, Object> returnTable = Tool.testLayui(examList, page, limit);
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());

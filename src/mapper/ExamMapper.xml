@@ -34,9 +34,6 @@
         limit #{pagestart},#{size}
     </select>
 
-    <select id="examrecodeCount" resultType="integer">
-        select count(*) from examrecode
-    </select>
 
 
 
