@@ -1,17 +1,18 @@
-layui.use(['form', 'layer', 'laydate', 'table', 'jquery'], function () {
+layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laydate = layui.laydate,
-        // laytpl = layui.laytpl,
+        laytpl = layui.laytpl,
         table = layui.table;
 
     var id = JSON.parse(window.sessionStorage.getItem("user")).id; //取到登录者的id
-
+    var classid = JSON.parse(window.sessionStorage.getItem("user")).classid;
+    console.log(classid);
     //考试记录列表
     var tableIns = table.render({
         elem: '#newsList',
-        url: '/ssm/examRecode.action?id='+id,
+        url: '/ssm/examRecode.action?id='+id+'&classid='+classid,
         cellMinWidth: 95,
         page: true,
         height: "full-125",

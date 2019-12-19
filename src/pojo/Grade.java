@@ -1,10 +1,10 @@
 package pojo;
 
 public class Grade {
-    Integer id;
-    String examid;
-    String score;
-    String classid;
+   private Integer id;
+   private String examid;
+   private String score;
+   private String userid;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class Grade {
         this.score = score;
     }
 
-    public String getClassid() {
-        return classid;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setClassid(String classid) {
-        this.classid = classid;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

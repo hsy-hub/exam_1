@@ -3,18 +3,18 @@ package pojo;
 import java.util.Date;
 
 public class ExamUser {
-    Integer id;
-    String examName;
-    String examDecript;
-    String classid;
-    String pubstauts;
-    String browsetype;
-    String publisher;
-    Date publicTime;
-    String release;
-    String testType;
-    User user;
-    Grade grade;
+    private Integer id;
+    private String examName;
+    private String examDecript;
+    private String classid;
+    private String pubstauts;
+    private String browsetype;
+    private String publisher;
+    private Date publicTime;
+    private String release;
+    private String testType;
+    private User user;
+    private Grade grade;
 
     public Grade getGrade() {
         return grade;
