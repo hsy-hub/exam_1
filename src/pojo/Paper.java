@@ -1,11 +1,11 @@
 package pojo;
 
 public class Paper {
-    Integer id;
-    Integer examid;
-    String title;
-    String options;
-    String answer;
+    private Integer id;
+    private Integer examid;
+    private String title;
+    private String options;
+    private String answer;
 
     public Integer getId() {
         return id;

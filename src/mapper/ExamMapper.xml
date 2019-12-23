@@ -49,6 +49,7 @@
         <result column="pubstauts" property="pubstauts"/>
         <result column="browsetype" property="browsetype"/>
         <result column="publicTime" property="publicTime"/>
+        <result column="paperFile" property="paperFile"/>
         <association property="user" javaType="User">
             <id column="id" property="id"/>
             <result column="loginName" property="loginName"/>
@@ -80,4 +81,15 @@
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="ExamUser">
         insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null)
     </insert>
+
+    <insert id="insertPaper">
+        insert into paper(id,examid,title,options,answer) values
+        <foreach collection="list" item="pl" separator=",">
+            (#{pl.id},#{pl.examid},#{pl.title},#{pl.options},#{pl.answer},)
+        </foreach>
+    </insert>
+
+<update id="updatePaperFile" parameterType="examUser">
+    update exam set paperFile=#{paperFile} where id=#{id}
+</update>
 </mapper>

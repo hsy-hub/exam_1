@@ -4,6 +4,7 @@ import mapper.ExamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.ExamUser;
+import pojo.Paper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,5 +41,15 @@ public class ExamDaoImpl implements ExamDao {
     @Override
     public int add(ExamUser exam) {
         return examMapper.add(exam);
+    }
+
+    @Override
+    public int insertPaper(List<Paper> list) {
+        return examMapper.insertPaper(list);
+    }
+
+    @Override
+    public int updatePaperFile() {
+        return examMapper.updatePaperFile();
     }
 }

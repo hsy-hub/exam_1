@@ -13,8 +13,17 @@ public class ExamUser {
     private Date publicTime;
     private String release;
     private String testType;
+    private String paperFile;
     private User user;
     private Grade grade;
+
+    public String getPaperFile() {
+        return paperFile;
+    }
+
+    public void setPaperFile(String paperFile) {
+        this.paperFile = paperFile;
+    }
 
     public Grade getGrade() {
         return grade;

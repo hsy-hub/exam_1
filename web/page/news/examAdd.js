@@ -19,7 +19,7 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
 	 //拖拽上传
 	  upload.render({
 	    elem: '#test10'
-	    ,url: '/upload/'
+	    ,url: '/ssm/updatePaperFile.action'
 	    ,exts: 'xls|xlsx' //只允许上传Excel文件
 	    ,done: function(res){
 	      console.log(res)

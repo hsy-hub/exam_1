@@ -2,25 +2,28 @@ package controller;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import pojo.Exam;
 import pojo.ExamUser;
 
 
+import pojo.Paper;
 import service.ExamDao;
 import tool.JsonDateValueProcessor;
 import tool.Tool;
+import tool.ToolUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ExamController {
@@ -92,5 +95,39 @@ public class ExamController {
         return add;
 
     }
+
+    @RequestMapping("/insertPaper.action")
+    @ResponseBody
+    public int insertPaper(String path,int examid){
+        try {
+            List<Paper> list = ToolUtil.readExcel(path, examid);
+            int result = examDao.insertPaper(list);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return 0;
+    }
+
+    @RequestMapping("/updatePaperFile.action")
+    @ResponseBody
+    public Map<String,String> updatePaperFile(MultipartFile file,int id) throws IOException {
+        String filename = UUID.randomUUID().toString().replaceAll("-","");
+        String extention = FilenameUtils.getExtension(file.getOriginalFilename());
+        filename = filename+"."+extention;
+        String path = "D:\\upload\\";
+        Map<String,String> map = new HashMap<>();
+        Exam exam = new Exam();
+        exam.setId(id);
+        exam.setPaperFile(filename);
+        file.transferTo(new File(path+filename));
+        int update = examDao.updatePaperFile();
+        if (update>0){
+            map.put("path",path+filename);
+        }
+        return map;
+    }
+
+
 
 }

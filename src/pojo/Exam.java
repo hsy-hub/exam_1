@@ -13,6 +13,15 @@ public class Exam {
     Date publicTime;
     String release;
     String testType;
+    String paperFile;
+
+    public String getPaperFile() {
+        return paperFile;
+    }
+
+    public void setPaperFile(String paperFile) {
+        this.paperFile = paperFile;
+    }
 
     public String getRelease() {
         return release;

@@ -39,14 +39,13 @@
 
 	<!--操作-->
 	<script type="text/html" id="newsListBar">
-
-		{{#  if(d.grade.score == 11){ }}
-		<a class="layui-btn layui-btn-xs" lay-event="action" href="page/login/login.html">开始考试</a>
-		{{#  }
+		{{#  if(d.grade.score == null){ }}
+		<a class="layui-btn layui-btn-xs" lay-event="action" href="#">开始考试</a>
 		{{#  } else { }}
-
+		考试结束
 		{{#  }}}
 	  </script>
+
 
 </form>
 <script type="text/javascript" src="../../layui/layui.js"></script>

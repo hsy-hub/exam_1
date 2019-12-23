@@ -1,7 +1,7 @@
 package mapper;
 
 import pojo.ExamUser;
-
+import pojo.Paper;
 
 
 import java.util.HashMap;
@@ -15,4 +15,6 @@ public interface ExamMapper {
     Integer examListCount();
     int deleteit(Integer id);
     int add(ExamUser exam);
+    int insertPaper(List<Paper> list);
+    int updatePaperFile();
 }
