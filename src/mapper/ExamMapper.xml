@@ -35,11 +35,6 @@
     </select>
 
 
-
-
-
-
-
     <resultMap id="resultMap1" type="examUser">
         <id column="id" property="id"/>
         <result column="examName" property="examName"/>
@@ -61,7 +56,7 @@
     </resultMap>
 
     <select id="getexamList" resultMap="resultMap1" parameterType="hashmap">
-        SELECT e.*,u.id AS uid,u.loginName FROM exam e INNER JOIN USER u ON e.publisher=u.id
+        SELECT e.*,u.id AS uid,u.loginName FROM exam e INNER JOIN user u ON e.publisher=u.id
         <where>
             <if test="examName != null and examName != ''">
                 and examName like  '%${examName}%'
@@ -79,7 +74,7 @@
     </delete>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="ExamUser">
-        insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null)
+        insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null,null)
     </insert>
 
     <insert id="insertPaper">

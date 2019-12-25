@@ -6,13 +6,13 @@ layui.use(['form','layer','jquery','table'],function(){
     $ = layui.$,
     layer = layui.layer;
 
-        form.on("submit(userModify)",function(data){
-            $.ajax(
-                {
-                    data: JSON.stringify(data.field),
-                    url: "/ssm/updateUserList.action",
-                    type: "post",
-                    contentType: "application/json",
+        // form.on("submit(userModify)",function(data){
+        //     $.ajax(
+        //         {
+        //             data: JSON.stringify(data.field),
+        //             url: "/ssm/updateUserList.action",
+        //             type: "post",
+        //             contentType: "application/json",
                     // success: function (d) {
                     //     console.log(d);
                     //     if (d > 0) {
@@ -24,9 +24,24 @@ layui.use(['form','layer','jquery','table'],function(){
                     //         layer.msg("修改失败！")
                     //     }
                     // }
-                })
+                // })
             //return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        // });
+
+
+    form.on('submit(userModify)', function (data) {
+        console.log(data);
+        $.post('updateUserList.action', data.field, function (flag) {
+            if (flag == 1) {
+                layer.msg("修改成功", {icon: 6});
+                layer.closeAll();
+                table.reload('userListTable', {});//修改后返回列表页面进行刷新
+            } else {
+                layer.msg("修改失败", {icon: 6});
+            }
         });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
 
     //格式化时间
     function filterTime(val){
@@ -40,4 +55,4 @@ layui.use(['form','layer','jquery','table'],function(){
     var time = new Date();
     var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
 
-})
+});

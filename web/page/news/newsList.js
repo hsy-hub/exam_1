@@ -20,7 +20,8 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
             {type: "checkbox", fixed:"left", width:50},
             {field: 'id', title: 'ID', width:60, align:"center"},
             {field: 'examName', title: '试题名称', width:350},
-            {field: 'publisher', title: '发布者', align:'center'},
+            // {field: 'publisher', title: '发布者', align:'center'},
+            {templet: '<div>{{(d.user.loginName)}}</div>', title: '发布者', align: 'center',minWidth: 150},
             {field: 'pubstauts', title: '发布状态',  align:'center',templet:function (d) {
                     if(d.pubstauts == "0"){
                         return "草稿箱";
@@ -93,7 +94,7 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
     }
     $(".addNews_btn").click(function(){
         addNews();
-    })
+    });
 
     //批量删除
     $(".delAll_btn").click(function(){

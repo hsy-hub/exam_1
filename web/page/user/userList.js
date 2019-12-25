@@ -152,7 +152,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'jquery','util'], function () {
                     });
                 }, 500)
             }
-        })
+        });
         layui.layer.full(index2);
         window.sessionStorage.setItem("index2", index2);
         //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
@@ -209,6 +209,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'jquery','util'], function () {
     table.on('tool(userList)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
+
         id = $("#id").val();
         if (layEvent === 'edit') { //编辑
             userModify(data);
@@ -257,19 +258,6 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'jquery','util'], function () {
             });
         }
     });
-    form.on('submit(update-submit_btn)', function (data) {
-        console.log(data);
-        $.post('updateUserList.action', data.field, function (flag) {
 
-            if (flag == 1) {
-                layer.msg("修改成功", {icon: 6});
-                layer.closeAll();
-                table.reload('userListTable', {});//修改后返回列表页面进行刷新
-            } else {
-                layer.msg("修改失败", {icon: 6});
-            }
-        })
-        //return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    })
 
 })

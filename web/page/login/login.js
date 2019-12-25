@@ -1,6 +1,6 @@
 layui.use(['form','layer','jquery'],function(){
     var form = layui.form,
-        layer = parent.layer === undefined ? layui.layer : top.layer
+        layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
 
     /*$(".loginBody .seraph").click(function(){

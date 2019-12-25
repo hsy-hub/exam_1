@@ -93,7 +93,6 @@ public class ExamController {
     public int addExam(@RequestBody ExamUser exam) throws IOException {
         int add = examDao.add(exam);
         return add;
-
     }
 
     @RequestMapping("/insertPaper.action")
