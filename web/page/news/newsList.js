@@ -76,7 +76,7 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
                     body.find(".testType input[title=" + edit.testType + "]").prop("checked", "checked");
                     body.find(".browsetype input[name='browsetype'][title='"+edit.browsetype+"']").prop("checked","checked"); //浏览权限
                     body.find(".release input[name='release'][title='"+edit.release+"']").prop("checked","checked"); //发布
-                    body.find(".publicTime").val(edit.publicTime);  //发布状态
+                    body.find(".publicTime").val(edit.publicTime);  //发布时间
                     form.render();
                 }
                 setTimeout(function(){

@@ -17,14 +17,16 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
 
 
 	 //拖拽上传
-	  upload.render({
-	    elem: '#test10'
-	    ,url: '/ssm/insertPaper.action'
-	    ,exts: 'xls|xlsx' //只允许上传Excel文件
-	    ,done: function(res){
-	      console.log(res)
-	    }
-	  });
+	 //  upload.render({
+	 //    elem: '#test10'
+	 //    ,url: '/ssm/updatePaperFile.action'
+	 //    ,exts: 'xls|xlsx' //只允许上传Excel文件
+     //      ,auto:false
+     //      , bindAction: '#uploadfile'
+     //      ,done: function(res){
+	 //      console.log(res)
+	 //    }
+	 //  });
 
 
 
@@ -76,8 +78,7 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
         // var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
         // var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        $.ajax(
-            {
+        $.ajax({
                 url: "/ssm/addExam.action",
                 data: JSON.stringify(data.field),
                 type: "post",
@@ -86,58 +87,68 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
                     console.log(d);
                     if (d > 0) {
                         reid = d;
+                        $("#uploadfile").trigger("click");
+
                         parent.location.reload();    //添加后返回列表页面进行刷新
                         var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
-                        parent.layer.close(index);     //关闭当前frame/刷新父页面
+                        // parent.layer.close(index);     //关闭当前frame/刷新父页面
+
                     } else {
                         layer.msg("添加失败！")
                     }
                 }
             });
-        // setTimeout(function(){
-        //     top.layer.close(index);
-        //     top.layer.msg("文章添加成功！");
-        //     layer.closeAll("iframe");
-        //     //刷新父页面
-        //     parent.location.reload();
-        // },500);
         return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
 
-    // //普通文件上传
-    // var uploadInst = upload.render({
-    //     elem: '#test10'
-    //     , url: '/ssm/updatePaperFile.action'
-    //     , auto: false//选择文件后不自动上传
-    //     , bindAction: '#up' //指向一个按钮触发上传
-    //     , before: function (obj) {
-    //         layer.load(); //上传loading
-    //         this.data = {'id': reid};//整合上传的参数
-    //         //预读本地文件示例，不支持ie8
-    //         //选择文件后的回调
-    //     },
-    //     choose: function (obj) {
-    //         obj.preview(function (index, file, result) {
-    //             $('#preview').attr('src', result); //图片链接（base64）
-    //         });
-    //     }
-    //     , done: function (msg) {
-    //         //如果上传失败
-    //         if (msg.code > 0) {
-    //             return layer.msg('上传失败');
-    //         }
-    //         //上传成功
-    //     }
-    //     , error: function () {
-    //         //演示失败状态，并实现重传
-    //         var demoText = $('#demoText');
-    //         demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-    //         demoText.find('.demo-reload').on('click', function () {
-    //             uploadInst.upload();
-    //         });
-    //     }
-    // });
-    //
+    //普通文件上传
+    upload.render({
+        elem: '#test10'
+        , url: '/ssm/updatePaperFile.action'
+        ,exts: 'xls|xlsx' //只允许上传Excel文件
+        , auto: false//选择文件后不自动上传
+        , bindAction: '#uploadfile' //指向一个按钮触发上传
+        , before: function (obj) {
+            layer.load(); //上传loading
+            this.data = {'id':reid};//整合上传的参数
+            //预读本地文件示例，不支持ie8
+            //选择文件后的回调
+        },
+        choose: function (obj) {
+            obj.preview(function (index, file, result) {
+                $('#preview').attr('src', result); //文件链接
+            });
+        }
+        , done: function (msg) {
+            //如果上传失败
+            if (msg.code > 0) {
+                return layer.msg('上传失败');
+            }else{
+                //上传成功
+                console.log(msg.path);
+                $.ajax({
+                     url: '/ssm/insertPaper.action'
+                    ,type: "post"
+                    ,exts: 'xls|xlsx' //只允许上传Excel文件
+                    ,done: function(res){
+                        console.log(res)
+                        parent.layer.close(index);
+                    }
+
+                });
+            }
+
+        }
+        , error: function () {
+            //演示失败状态，并实现重传
+            var demoText = $('#demoText');
+            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+            demoText.find('.demo-reload').on('click', function () {
+                uploadInst.upload();
+            });
+        }
+    });
+
 
     //预览
     form.on("submit(look)",function(){

@@ -110,12 +110,12 @@ public class ExamController {
 
     @RequestMapping("/updatePaperFile.action")
     @ResponseBody
-    public Map<String,String> updatePaperFile(MultipartFile file,int id) throws IOException {
+    public Map<String,Object> updatePaperFile(MultipartFile file,int id) throws IOException {
         String filename = UUID.randomUUID().toString().replaceAll("-","");
         String extention = FilenameUtils.getExtension(file.getOriginalFilename());
         filename = filename+"."+extention;
-        String path = "D:\\upload\\";
-        Map<String,String> map = new HashMap<>();
+        String path = "D:\\upload";
+        Map<String,Object> map = new HashMap<>();
         Exam exam = new Exam();
         exam.setId(id);
         exam.setPaperFile(filename);
@@ -123,6 +123,7 @@ public class ExamController {
         int update = examDao.updatePaperFile();
         if (update>0){
             map.put("path",path+filename);
+            map.put("examid",id);
         }
         return map;
     }

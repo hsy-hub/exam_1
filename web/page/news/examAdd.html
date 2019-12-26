@@ -35,14 +35,18 @@
 		<div class="layui-form-item magb0">
 			<label class="layui-form-label">试题上传</label>
 			<div class="layui-input-block">
-				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;" id="preview">
 				  <legend>拖拽上传</legend>
 				</fieldset> 
 				 
 				<div class="layui-upload-drag" id="test10">
 				  <i class="layui-icon"></i>
-				  <p  id="preview">点击上传，或将文件拖拽到此处</p>
+				  <p>点击上传，或将文件拖拽到此处</p>
 				</div>
+				<button type="button" class="btn btn-primary" id="uploadfile"
+						style="display:none">
+					提交文件
+				</button>
 			</div>
 		</div>
 	</div>
@@ -98,7 +102,7 @@
 			</div>
 			<hr class="layui-bg-gray" />
 			<div class="layui-form-item layui-right">
-				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit="" id="up"><i class="layui-icon">&#xe609;</i>发布</a>
+				<a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit=""><i class="layui-icon">&#xe609;</i>发布</a>
 				<!--<a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>-->
 			</div>
 		</div>
