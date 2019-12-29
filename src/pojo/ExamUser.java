@@ -14,8 +14,26 @@ public class ExamUser {
     private String release;
     private String testType;
     private String paperFile;
+    private String testAllTime;
+    private String totalpoints;
     private User user;
     private Grade grade;
+
+    public String getTestAllTime() {
+        return testAllTime;
+    }
+
+    public void setTestAllTime(String testAllTime) {
+        this.testAllTime = testAllTime;
+    }
+
+    public String getTotalpoints() {
+        return totalpoints;
+    }
+
+    public void setTotalpoints(String totalpoints) {
+        this.totalpoints = totalpoints;
+    }
 
     public String getPaperFile() {
         return paperFile;

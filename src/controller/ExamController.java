@@ -35,18 +35,18 @@ public class ExamController {
     //考试记录列表
     @RequestMapping("/examRecode.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
-    public Map<String, Object> examRecode(ExamUser examRecode,@RequestParam("id")Integer id,String classid,int page, int limit) {
+    public Map<String, Object> examRecode(ExamUser examRecode, @RequestParam("id") Integer id, String classid, int page, int limit) {
         HashMap<String, Object> map = new HashMap<>();
         int pagestart = (page - 1) * limit;
         map.put("pagestart", pagestart);
         map.put("size", limit);
-        map.put("userid",id);
-        map.put("classid",classid);
+        map.put("userid", id);
+        map.put("classid", classid);
         map.put("examName", examRecode.getExamName());//查询条件
         List<ExamUser> examList = examDao.getExamRecodeList(map);
-        map.put("code",0);    //自己设定的code值一定要写0，其他的值都是错误的
-        map.put("msg","");    //msg的值一定要写"",不然会一直报错
-        map.put("count",examDao.examListCount());
+        map.put("code", 0);    //自己设定的code值一定要写0，其他的值都是错误的
+        map.put("msg", "");    //msg的值一定要写"",不然会一直报错
+        map.put("count", examDao.examListCount());
 //        Map<String, Object> returnTable = Tool.testLayui(examList, page, limit);
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
@@ -57,7 +57,7 @@ public class ExamController {
     }
 
 
-//试题管理列表
+    //试题管理列表
     @RequestMapping("/examList.action")
     @ResponseBody       //加上 @ResponseBody 后，会直接返回 json 数据
     public Map<String, Object> examList(ExamUser exam, int page, int limit) {
@@ -74,7 +74,8 @@ public class ExamController {
     }
 
     @RequestMapping("/deleteit.action")
-    public @ResponseBody int deleteit(String ids) {
+    public @ResponseBody
+    int deleteit(String ids) {
         boolean d = ids.endsWith(",");
         if (d) {
             ids = ids.substring(0, ids.length() - 1);
@@ -97,7 +98,7 @@ public class ExamController {
 
     @RequestMapping("/insertPaper.action")
     @ResponseBody
-    public int insertPaper(String path,int examid){
+    public int insertPaper(String path, int examid) {
         try {
             List<Paper> list = ToolUtil.readExcel(path, examid);
             int result = examDao.insertPaper(list);
@@ -105,29 +106,30 @@ public class ExamController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       return 0;
+        return 0;
     }
 
     @RequestMapping("/updatePaperFile.action")
     @ResponseBody
-    public Map<String,Object> updatePaperFile(MultipartFile file,int id) throws IOException {
-        String filename = UUID.randomUUID().toString().replaceAll("-","");
+    public Map<String, Object> updatePaperFile(MultipartFile file, int id) throws IOException {
+        String filename = UUID.randomUUID().toString().replaceAll("-", "");
         String extention = FilenameUtils.getExtension(file.getOriginalFilename());
-        filename = filename+"."+extention;
-        String path = "D:\\upload";
-        Map<String,Object> map = new HashMap<>();
+        filename = filename + "." + extention;
+        String path = "D:\\upload\\";
+        Map<String, Object> map = new HashMap<>();
         Exam exam = new Exam();
         exam.setId(id);
         exam.setPaperFile(filename);
-        file.transferTo(new File(path+filename));
-        int update = examDao.updatePaperFile();
-        if (update>0){
-            map.put("path",path+filename);
-            map.put("examid",id);
+        file.transferTo(new File(path + filename));
+        int update = examDao.updatePaperFile(exam);
+        if (update > 0) {
+            map.put("path", path + filename);
+            map.put("examid", id);
+            map.put("code", 0);
+            System.out.println(map);
         }
         return map;
     }
-
 
 
 }

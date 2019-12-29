@@ -1,5 +1,6 @@
 package service;
 
+import pojo.Exam;
 import pojo.ExamUser;
 import pojo.Paper;
 
@@ -17,5 +18,5 @@ public interface ExamDao {
     int add(ExamUser exam);
     int insertPaper(List<Paper> list);
 
-    int updatePaperFile();
+    int updatePaperFile(Exam exam);
 }

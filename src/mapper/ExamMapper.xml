@@ -45,6 +45,8 @@
         <result column="browsetype" property="browsetype"/>
         <result column="publicTime" property="publicTime"/>
         <result column="paperFile" property="paperFile"/>
+        <result column="testAllTime" property="testAllTime"/>
+        <result column="totalpoints" property="totalpoints"/>
         <association property="user" javaType="User">
             <id column="id" property="id"/>
             <result column="loginName" property="loginName"/>
@@ -74,13 +76,13 @@
     </delete>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="ExamUser">
-        insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null,#{paperFile})
+        insert into exam value (null,#{examName},#{examDecript},#{classid},#{pubstauts},#{testType},#{browsetype},#{publisher},#{release},null,#{paperFile},#{testAllTime},#{totalpoints})
     </insert>
 
     <insert id="insertPaper">
-        insert into paper(id,examid,title,options,answer) values
+        insert into paper values
         <foreach collection="list" item="pl" separator=",">
-            (#{pl.id},#{pl.examid},#{pl.title},#{pl.options},#{pl.answer},)
+            (#{pl.id},#{pl.examid},#{pl.title},#{pl.options},#{pl.answer})
         </foreach>
     </insert>
 

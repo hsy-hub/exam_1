@@ -72,6 +72,8 @@ layui.use(['form','layer','laydate','table','laytpl','jquery'],function(){
                 if(edit){
                     body.find(".examName").val(edit.examName); //试题名称
                     body.find(".examDecript").val(edit.examDecript);  //试题描述
+                    body.find(".testAllTime").val(edit.testAllTime);  //试题描述
+                    body.find(".totalpoints").val(edit.totalpoints);  //试题描述
                     body.find(".pubstauts select").val(edit.pubstauts);  //发布状态
                     body.find(".testType input[title=" + edit.testType + "]").prop("checked", "checked");
                     body.find(".browsetype input[name='browsetype'][title='"+edit.browsetype+"']").prop("checked","checked"); //浏览权限

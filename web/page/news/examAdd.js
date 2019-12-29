@@ -28,9 +28,6 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
 	 //    }
 	 //  });
 
-
-
-
     //格式化时间
     function filterTime(val){
         if(val < 10){
@@ -73,6 +70,8 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
             }
         }
     });
+
+
     form.on("submit(addNews)",function(data){
         //截取文章内容中的一部分文字放入文章摘要
         // var abstract = layedit.getText(editIndex).substring(0,50);
@@ -88,11 +87,6 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
                     if (d > 0) {
                         reid = d;
                         $("#uploadfile").trigger("click");
-
-                        parent.location.reload();    //添加后返回列表页面进行刷新
-                        var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
-                        // parent.layer.close(index);     //关闭当前frame/刷新父页面
-
                     } else {
                         layer.msg("添加失败！")
                     }
@@ -116,23 +110,26 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
         },
         choose: function (obj) {
             obj.preview(function (index, file, result) {
-                $('#preview').attr('src', result); //文件链接
+                $('#preview').attr('src', "timg.png"); //文件链接
             });
         }
         , done: function (msg) {
+
             //如果上传失败
             if (msg.code > 0) {
                 return layer.msg('上传失败');
             }else{
+                console.log(msg);
                 //上传成功
-                console.log(msg.path);
                 $.ajax({
-                     url: '/ssm/insertPaper.action'
-                    ,type: "post"
-                    ,exts: 'xls|xlsx' //只允许上传Excel文件
-                    ,done: function(res){
+                     url: "/ssm/insertPaper.action",
+                    data:{"path":msg.path,"examid":msg.examid},
+                    type:"post",
+                    success: function(res){
                         console.log(res)
-                        parent.layer.close(index);
+                        parent.location.reload();    //添加后返回列表页面进行刷新
+                        var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
+                        parent.layer.close(index);     //关闭当前frame/刷新父页面
                     }
 
                 });

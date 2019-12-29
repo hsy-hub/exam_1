@@ -1,5 +1,6 @@
 package mapper;
 
+import pojo.Exam;
 import pojo.ExamUser;
 import pojo.Paper;
 
@@ -16,5 +17,5 @@ public interface ExamMapper {
     int deleteit(Integer id);
     int add(ExamUser exam);
     int insertPaper(List<Paper> list);
-    int updatePaperFile();
+    int updatePaperFile(Exam exam);
 }

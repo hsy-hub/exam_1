@@ -3,6 +3,7 @@ package service;
 import mapper.ExamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.Exam;
 import pojo.ExamUser;
 import pojo.Paper;
 
@@ -40,7 +41,8 @@ public class ExamDaoImpl implements ExamDao {
 
     @Override
     public int add(ExamUser exam) {
-        return examMapper.add(exam);
+        examMapper.add(exam);
+        return exam.getId();
     }
 
     @Override
@@ -49,7 +51,7 @@ public class ExamDaoImpl implements ExamDao {
     }
 
     @Override
-    public int updatePaperFile() {
-        return examMapper.updatePaperFile();
+    public int updatePaperFile(Exam exam) {
+        return examMapper.updatePaperFile(exam);
     }
 }
