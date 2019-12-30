@@ -4,6 +4,8 @@ layui.use(['form','layer','jquery'],function(){
 		laypage = layui.laypage,
 		$ = layui.jquery;
 
+
+
  	var systemParameter;
  	form.on("submit",function(data){
  		window.location.href = "exam.html";
