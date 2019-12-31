@@ -73,7 +73,11 @@
         select * from paper where examid=#{examid}
     </select>
 
-    <insert id="scoreInsert">
-        insert into grade value (null,null,#{score},null)
+    <select id="getAnswer" resultType="string" parameterType="integer">
+        select answer from paper where examid=#{examid}
+    </select>
+
+    <insert id="insertGrade" parameterType="Grade">
+        insert into grade (id,score,examid,userid) values (null,#{score},#{examid},#{userid})
     </insert>
 </mapper>

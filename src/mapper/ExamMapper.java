@@ -2,6 +2,7 @@ package mapper;
 
 import pojo.Exam;
 import pojo.ExamUser;
+import pojo.Grade;
 import pojo.Paper;
 
 
@@ -19,5 +20,6 @@ public interface ExamMapper {
     int insertPaper(List<Paper> list);
     int updatePaperFile(Exam exam);
     List<Paper> makePaper(int examid);
-    int advance();
+    List<String> getAnswer(int examid);
+    int insertGrade(Grade grade);
 }

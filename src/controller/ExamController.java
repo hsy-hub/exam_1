@@ -14,6 +14,7 @@ import pojo.Exam;
 import pojo.ExamUser;
 
 
+import pojo.Grade;
 import pojo.Paper;
 import service.ExamDao;
 import tool.JsonDateValueProcessor;
@@ -139,4 +140,27 @@ public class ExamController {
         return paperList;
     }
 
+    @RequestMapping("/advance.action")
+    @ResponseBody
+    public int advance(@RequestParam(value="choosex[]") String[] choosex, int examid, int userid) {
+        //   for (int i = 0; i < choice.size(); i++) {
+        int total = 0;
+        List<String> getanswer = examDao.getAnswer(examid);
+        int avage = 100 / getanswer.size();//每道题的分数
+        //String[] split = choices.split(",");
+        for (int i = 0; i < getanswer.size(); i++) {
+            String a = getanswer.get(i).toLowerCase();
+            if (a.equals(choosex[i].toLowerCase())){
+                total += avage;
+            }
+        }
+        //插入成绩
+        Grade score = new Grade();
+        score.setUserid(userid+"");
+        score.setExamid(examid+"");
+        score.setScore(total+"");//+"" (int型转为String型)
+        int result = examDao.insertGrade(score);
+        System.out.println(total);
+        return result;
+    }
 }

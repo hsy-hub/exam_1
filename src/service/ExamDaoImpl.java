@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.Exam;
 import pojo.ExamUser;
+import pojo.Grade;
 import pojo.Paper;
 
 import java.util.HashMap;
@@ -61,7 +62,14 @@ public class ExamDaoImpl implements ExamDao {
     }
 
     @Override
-    public int advance() {
-        return examMapper.advance();
+    public List<String> getAnswer(int examid) {
+        return examMapper.getAnswer(examid);
     }
+
+    @Override
+    public int insertGrade(Grade grade) {
+        return examMapper.insertGrade(grade);
+    }
+
+
 }

@@ -126,7 +126,7 @@ layui.use(['form','layer','layedit','laydate','upload','jquery','laypage'],funct
                     data:{"path":msg.path,"examid":msg.examid},
                     type:"post",
                     success: function(res){
-                        console.log(res)
+                        console.log(res);
                         parent.location.reload();    //添加后返回列表页面进行刷新
                         var index = parent.layer.getFrameIndex(window.name);    //获得frame索引
                         parent.layer.close(index);     //关闭当前frame/刷新父页面
