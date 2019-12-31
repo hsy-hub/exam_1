@@ -18,4 +18,6 @@ public interface ExamMapper {
     int add(ExamUser exam);
     int insertPaper(List<Paper> list);
     int updatePaperFile(Exam exam);
+    List<Paper> makePaper(int examid);
+    int advance();
 }

@@ -2,27 +2,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.ExamMapper">
-<!--<resultMap id="resultMap" type="examrecode">-->
-    <!--<id column="id" property="id"/>-->
-    <!--&lt;!&ndash;<result column="userid" property="userid"/>&ndash;&gt;-->
-    <!--<result column="examName" property="examName"/>-->
-    <!--<result column="examDecript" property="examDecript"/>-->
-    <!--<result column="score" property="score"/>-->
-    <!--<result column="examTime" property="examTime"/>-->
-    <!--<association property="exam1" javaType="Exam">-->
-        <!--<id column="id" property="id"/>-->
-        <!--<result column="examName" property="examName"/>-->
-        <!--<result column="examDecript" property="examDecript"/>-->
-    <!--</association>-->
-    <!--&lt;!&ndash;<association property="user" javaType="User">&ndash;&gt;-->
-        <!--&lt;!&ndash;<id column="id" property="id"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<result column="loginName" property="loginName"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</association>&ndash;&gt;-->
-    <!--<association property="grade" javaType="Grade">-->
-        <!--<id column="id" property="id"/>-->
-        <!--<result column="score" property="score"/>-->
-    <!--</association>-->
-<!--</resultMap>-->
 
     <select id="getExamRecodeList" resultMap="resultMap1" parameterType="hashmap">
         SELECT e.id,e.`examName`,e.`examDecript`,g.`score`FROM exam e LEFT JOIN grade g ON g.examid=e.id AND g.`userid`=#{userid} WHERE e.classid=#{classid}
@@ -86,7 +65,15 @@
         </foreach>
     </insert>
 
-<update id="updatePaperFile" parameterType="examUser">
-    update exam set paperFile=#{paperFile} where id=#{id}
-</update>
+    <update id="updatePaperFile" parameterType="examUser">
+        update exam set paperFile=#{paperFile} where id=#{id}
+    </update>
+
+    <select id="makePaper" resultType="list" parameterType="Integer">
+        select * from paper where examid=#{examid}
+    </select>
+
+    <insert id="scoreInsert">
+        insert into grade value (null,null,#{score},null)
+    </insert>
 </mapper>

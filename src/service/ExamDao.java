@@ -19,4 +19,6 @@ public interface ExamDao {
     int insertPaper(List<Paper> list);
 
     int updatePaperFile(Exam exam);
+    List<Paper> makePaper(int examid);
+    int advance();
 }

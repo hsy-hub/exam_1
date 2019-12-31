@@ -132,4 +132,11 @@ public class ExamController {
     }
 
 
+    @RequestMapping("/makePaper.action")
+    @ResponseBody
+    public List<Paper> makePaper(int examid){
+        List<Paper> paperList = examDao.makePaper(examid);
+        return paperList;
+    }
+
 }

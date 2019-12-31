@@ -54,4 +54,14 @@ public class ExamDaoImpl implements ExamDao {
     public int updatePaperFile(Exam exam) {
         return examMapper.updatePaperFile(exam);
     }
+
+    @Override
+    public List<Paper> makePaper(int examid) {
+        return examMapper.makePaper(examid);
+    }
+
+    @Override
+    public int advance() {
+        return examMapper.advance();
+    }
 }
