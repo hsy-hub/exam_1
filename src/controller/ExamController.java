@@ -155,11 +155,11 @@ public class ExamController {
             }
         }
         //插入成绩
-        Grade score = new Grade();
-        score.setUserid(userid+"");
-        score.setExamid(examid+"");
-        score.setScore(total+"");//+"" (int型转为String型)
-        int result = examDao.insertGrade(score);
+        Grade grade = new Grade();
+        grade.setUserid(userid+"");
+        grade.setExamid(examid+"");
+        grade.setScore(total+"");//+"" (int型转为String型)
+        int result = examDao.insertGrade(grade);
         System.out.println(total);
         return result;
     }
