@@ -14,22 +14,22 @@ public class Exam {
     private String release;
     private String testType;
     private String paperFile;
-    private String testAllTime;
-    private String totalpoints;
+    private Integer testAllTime;
+    private Integer totalpoints;
 
-    public String getTestAllTime() {
+    public Integer getTestAllTime() {
         return testAllTime;
     }
 
-    public void setTestAllTime(String testAllTime) {
+    public void setTestAllTime(Integer testAllTime) {
         this.testAllTime = testAllTime;
     }
 
-    public String getTotalpoints() {
+    public Integer getTotalpoints() {
         return totalpoints;
     }
 
-    public void setTotalpoints(String totalpoints) {
+    public void setTotalpoints(Integer totalpoints) {
         this.totalpoints = totalpoints;
     }
 

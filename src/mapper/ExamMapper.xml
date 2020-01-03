@@ -4,7 +4,7 @@
 <mapper namespace="mapper.ExamMapper">
 
     <select id="getExamRecodeList" resultMap="resultMap1" parameterType="hashmap">
-        SELECT e.id,e.`examName`,e.`examDecript`,g.`score`FROM exam e LEFT JOIN grade g ON g.examid=e.id AND g.`userid`=#{userid} WHERE e.classid=#{classid}
+        SELECT e.id,e.`examName`,e.`examDecript`,e.testAllTime,e.totalpoints,g.`score`FROM exam e LEFT JOIN grade g ON g.examid=e.id AND g.`userid`=#{userid} WHERE e.classid=#{classid}
         <where>
             <if test="examName != null and examName != ''">
                 and examName like '%${examName}%'
@@ -69,7 +69,7 @@
         update exam set paperFile=#{paperFile} where id=#{id}
     </update>
 
-    <select id="makePaper" resultType="list" parameterType="Integer">
+    <select id="makePaper" resultType="Paper" parameterType="Integer">
         select * from paper where examid=#{examid}
     </select>
 

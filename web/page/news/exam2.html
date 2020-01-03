@@ -109,12 +109,12 @@
     var minute = 0;// 分
     var second = 0;// 秒
 
-
+    var totalpoints;
     window.onload = function () {
-        var time = window.sessionStorage.getItem("time");
-        var score = window.sessionStorage.getItem("score");
+        var testAllTime = window.sessionStorage.getItem("testAllTime");
+        totalpoints = window.sessionStorage.getItem("totalpoints");
         //显示考试信息
-        document.getElementById("mytime").innerHTML = '总分:' + score + '考试时间' + time + '分钟:';
+        document.getElementById("mytime").innerHTML = '总分:' + totalpoints + '考试时间' + testAllTime + '分钟:';
 
         var mytimeHtml = document.getElementById("mytime").innerHTML;
 
@@ -131,7 +131,7 @@
 
             document.getElementById("mytime").innerHTML = mytimeHtml + "<span>" + hour + "时" + minute + "分" + second + "秒</span>";
 
-            if (minute == time) {
+            if (minute == testAllTime) {
                 $("#advance").trigger("click");
             }
         }, 1000);
@@ -148,15 +148,15 @@
         var view = document.getElementById('view');//获取视图对象
         var getTpl = document.getElementById("demo").innerHTML;//获取模板对象中的html
         $.ajax({
-            url: "/makePaper.action",
+            url: "/ssm/makePaper.action",
             data: {"examid": examid},
             success: function (jsondata) {
                 console.log(jsondata);
                 var infos = [];
                 for (var i = 0; i < jsondata.length; i++) {
                     //答案数组
-                    var info = jsondata[i].options_;
-                    var infoarray = info.split(';');
+                    var info = jsondata[i].options;
+                    var infoarray = info.split('-');
                     for (let j = 0; j < infoarray.length; j++) {
                         infoarray[j] = infoarray[j].substring(2);
                     }
@@ -214,9 +214,9 @@
                 }
                 // 提交试卷
                 $.ajax({
-                    url: "/advance.action",
+                    url: "/ssm/advance.action",
                     type: 'post',//提交请求的类型
-                    data: {"examid": examid, "userid": userid, "choosex": choosex},//数据
+                    data: {"examid": examid, "userid": userid, "choosex": choosex,"totalpoints":totalpoints},//数据
                     success: function (d) {
                         if (d > 0) {
                             layer.msg("交卷完成 ");

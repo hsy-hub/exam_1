@@ -26,6 +26,8 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             // {templet: '<div>{{(d.exam1.examName)}}</div>', title: '试卷名称', align: 'center'},
             {field: 'examName', title: '试卷名称', align: "center"},
             // {templet: '<div>{{(d.exam1.examDecript)}}</div>', title: '试题描述', align: 'center'},
+            {field: 'testAllTime', title: '总时间', align: "center"},
+            {field: 'totalpoints', title: '总分', align: "center"},
             {field: 'examDecript', title: '试题描述', align: "center"},
             {templet: '<div>{{(d.grade.score)}}</div>', title: '分数', align: 'center'},
             // {field: 'examTime', title: '考试时间', align: 'center', minWidth: 110
@@ -93,7 +95,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
                         body.find(".loginName").html(JSON.parse(window.sessionStorage.getItem("user")).loginName);
                         window.sessionStorage.setItem("examid", data.id);
                         window.sessionStorage.setItem("testAllTime", data.testAllTime);
-                        window.sessionStorage.setItem("score", data.totalpoints);
+                        window.sessionStorage.setItem("totalpoints", data.totalpoints);
                         form.render();
                     }
                 }
